@@ -1,6 +1,18 @@
 import { createGlobalStyle } from "styled-components";
+import GandhiSansRegular from "./fonts/GandhiSans-Regular.otf";
+import GandhiSansBold from "./fonts/GandhiSans-Bold.otf";
 
 const GlobalStyles = createGlobalStyle`
+
+    @font-face {
+        font-family: 'GandhiSans-Regular';
+        src: local('Gandhi Sans Regular'), local('GandhiSansRegular'), url(${GandhiSansRegular});
+    }
+
+    @font-face {
+        font-family: 'GandhiSans-Bold';
+        src: local('Gandhi Sans Bold'), local('GandhiSansBold'), url(${GandhiSansBold});
+    }
         /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
     /* Document
@@ -14,6 +26,7 @@ const GlobalStyles = createGlobalStyle`
     html {
     line-height: 1.15; /* 1 */
     -webkit-text-size-adjust: 100%; /* 2 */
+    font-family: "GandhiSans-Regular";
     }
 
     /* Sections
@@ -179,6 +192,7 @@ const GlobalStyles = createGlobalStyle`
     [type="reset"],
     [type="submit"] {
     -webkit-appearance: button;
+    appearance: button;
     }
 
     /**
@@ -264,6 +278,7 @@ const GlobalStyles = createGlobalStyle`
 
     [type="search"] {
     -webkit-appearance: textfield; /* 1 */
+    appearance: textfield;
     outline-offset: -2px; /* 2 */
     }
 
