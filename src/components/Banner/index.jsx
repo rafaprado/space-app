@@ -4,7 +4,7 @@ const StyledBanner = styled.div`
     background-image: url(${props => props.$bannerImage});
     background-repeat: no-repeat;
     min-height: 328px;
-    max-width: 100%;
+    width: 100%;
     position: relative;
     border-radius: 20px;
     background-size: cover;
