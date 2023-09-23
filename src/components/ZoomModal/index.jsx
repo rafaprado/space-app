@@ -38,7 +38,7 @@ const CloseButton = styled.button`
     cursor: pointer;
 `;
 
-const ZoomModal = ({photo, onCloseImage}) => {
+const ZoomModal = ({photo, onCloseImage, onToggleFavorite}) => {
     return(
         <>
             {photo &&
@@ -46,7 +46,7 @@ const ZoomModal = ({photo, onCloseImage}) => {
                 <Overlay />
                 <StyledDialog open={!!photo} onClose={onCloseImage}>
                     <DialogContainer>
-                        <Image photo={photo} expanded={true}/>
+                        <Image onToggleFavorite={onToggleFavorite} photo={photo} expanded={true}/>
                         <form method="dialog">
                             <CloseButton formMethod="dialog">
                                 <img src="/icons/fechar.png" alt=""/>

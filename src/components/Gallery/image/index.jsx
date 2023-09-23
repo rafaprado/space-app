@@ -52,7 +52,9 @@ const CardButton = styled.button`
 `;
 
 
-const Image = ({photo, onZoom, expanded = false}) => {
+const Image = ({photo, onZoom, expanded = false, onToggleFavorite}) => {
+    const favoriteIcon = photo.favorite ? "/icons/favorito-ativo.png" : "/icons/favorito.png";
+
     return(
         <GalleryCard $expanded={expanded}>
             <CardImage src={photo.path} alt="" />
@@ -60,8 +62,8 @@ const Image = ({photo, onZoom, expanded = false}) => {
                 <CardTitle>{photo.titulo}</CardTitle>
                 <CardFooter>
                     <ImagePath>{photo.fonte}</ImagePath>
-                    <CardButton>
-                        <img src="/icons/favorito.png" alt="" />
+                    <CardButton onClick={_ => onToggleFavorite(photo)}>
+                        <img src={favoriteIcon} alt="" />
                     </CardButton>
                     {!expanded && <CardButton onClick={() => onZoom(photo)}>
                         <img src="/icons/expandir.png" alt="" />

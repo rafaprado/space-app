@@ -18,16 +18,16 @@ const ImagesContainer = styled.div`
     gap: 24px;
 `;
 
-const Gallery = ({ photos = [], onSelectedPhoto}) => {
+const Gallery = ({ photos = [], onSelectedPhoto, onToggleFavorite, setTag}) => {
     return (
         <>
-            <Tags />
+            <Tags setTag={setTag}/>
             <GalleryContainer>
                 <FluidSection>
                     <Title>Search in the gallery</Title>
 
                     <ImagesContainer>
-                        {photos.map(photo => <Image key={photo.id} photo={photo} onZoom={onSelectedPhoto} />)}
+                        {photos.map(photo => <Image onToggleFavorite={onToggleFavorite} key={photo.id} photo={photo} onZoom={onSelectedPhoto} />)}
                     </ImagesContainer>
                 </FluidSection>
                 

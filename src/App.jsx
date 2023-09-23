@@ -6,7 +6,7 @@ import Banner from "./components/Banner";
 import bannerBackground from './assets/foto-destaque.png'
 import Gallery from "./components/Gallery";
 import photos from "./fotos.json";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ZoomModal from "./components/ZoomModal";
 
 const GradientBackgorund = styled.div`
@@ -36,13 +36,43 @@ function App() {
 
   const [photosFromGallery, setPhotosFromGallery] = useState(photos);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const [filter, setFilter] = useState('');
+  const [tag, setTag] = useState(0);
+
+  const onToggleFavorite = photo => {
+    if(photo.id === selectedPhoto?.id) {
+      setSelectedPhoto({
+        ...selectedPhoto,
+        favorite: !selectedPhoto.favorite
+      })
+    }
+
+    setPhotosFromGallery(photosFromGallery.map(photoFromGallery => {
+      return {
+        ...photoFromGallery,
+        favorite: photo.id === photoFromGallery.id ? !photo.favorite : photoFromGallery.favorite
+      }
+    }));
+  }
+
+  useEffect(() => {
+    const filteredPhotos = photos.filter(photo => {
+      const filterByTag = !tag || photo.tagId === tag;
+      const filterByTitle = !filter || photo.titulo.toLowerCase().includes(filter.toLocaleLowerCase());
+
+      return filterByTag && filterByTitle;
+    });
+
+    setPhotosFromGallery(filteredPhotos);
+
+  },[filter, tag]);
 
   return (
     <>
      <GradientBackgorund>
         <GlobalStyles />
         <AppContainer>
-          <Header />
+          <Header filter={filter} setFilter={setFilter}/>
           <MainContainer>
             <LateralMenu />
             <GalleryContent>
@@ -50,11 +80,11 @@ function App() {
                 text="A galeria mais completa de fotos do espaço!"
                 image={bannerBackground}
               />
-              <Gallery onSelectedPhoto={photo => setSelectedPhoto(photo)} photos={photosFromGallery} />
+              <Gallery setTag={setTag} onToggleFavorite={onToggleFavorite} onSelectedPhoto={photo => setSelectedPhoto(photo)} photos={photosFromGallery} />
             </GalleryContent>
           </MainContainer>
         </AppContainer>
-        <ZoomModal onCloseImage={() => setSelectedPhoto(null)} photo={selectedPhoto} />        
+        <ZoomModal onToggleFavorite={onToggleFavorite} onCloseImage={() => setSelectedPhoto(null)} photo={selectedPhoto} />        
      </GradientBackgorund>
     </>
   )

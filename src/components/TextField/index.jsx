@@ -29,10 +29,10 @@ const StyledTextField = styled.div`
     }
 `;
 
-const TextField = () => {
+const TextField = ({filter, setFilter}) => {
     return (
         <StyledTextField>
-            <input type="text" name="search" placeholder="O que você procura?" />
+            <input type="text" name="search" onChange={event => setFilter(event.target.value)} value={filter} placeholder="O que você procura?" />
             <AiOutlineSearch size={32} />           
         </StyledTextField>
     );

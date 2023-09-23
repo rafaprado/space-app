@@ -35,11 +35,11 @@ const TagsContainer = styled.div`
     gap: 24px;
 `
 
-const Tags = () => {
+const Tags = ({setTag}) => {
     return ( <SearchTagsContainer>
         <TagTitle>Busque por tags:</TagTitle>
         <TagsContainer>
-            {tags.map(tag => <StyledTag type='button' key={tag.id}>{tag.titulo}</StyledTag>)}
+            {tags.map(tag => <StyledTag onClick={() => setTag(tag.tag)} type='button' key={tag.id}>{tag.titulo}</StyledTag>)}
         </TagsContainer>
     </SearchTagsContainer>
     );
